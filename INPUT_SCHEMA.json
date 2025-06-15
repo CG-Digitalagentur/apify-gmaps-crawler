@@ -1,0 +1,38 @@
+{
+  "title": "Google Maps Scraper Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "searchTerm": {
+      "title": "Search term",
+      "type": "string",
+      "description": "e.g. 'photographer', 'fitnessstudio', 'tätowierer'",
+      "editor": "textfield"
+    },
+    "latitude": {
+      "title": "Latitude",
+      "type": "number",
+      "editor": "number",
+      "default": 48.397660
+    },
+    "longitude": {
+      "title": "Longitude",
+      "type": "number",
+      "editor": "number",
+      "default": 9.993304
+    },
+    "radiusKm": {
+      "title": "Radius in Kilometern",
+      "type": "number",
+      "default": 50,
+      "editor": "number"
+    },
+    "limit": {
+      "title": "Max. Anzahl an Ergebnissen",
+      "type": "integer",
+      "default": 10,
+      "editor": "number"
+    }
+  },
+  "required": ["searchTerm"]
+}
