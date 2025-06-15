@@ -1,48 +1,39 @@
-const { Actor } = require("apify");
-const { GoogleMapsScraper } = require("google-maps-scraper");
+const Apify = require('apify');
 
-Actor.main(async () => {
-  const input = await Actor.getInput();
+Apify.main(async () => {
+    const input = await Apify.getInput();
 
-  const {
-    searchStringsArray,
-    lat,
-    lng,
-    radiusKm,
-    maxCrawledPlaces,
-    language = "en",
-    searchMatching = "all",
-    website = "allPlaces",
-    skipClosedPlaces = true,
-    scrapePlaceDetailPage = true,
-    scrapeContacts = true,
-    reviewsSort = "newest",
-    scrapeReviewsPersonalData = true,
-  } = input;
+    const {
+        searchStringsArray,
+        latitude,
+        longitude,
+        radiusKm,
+        maxCrawledPlaces,
+        language,
+        searchMatching,
+        website,
+        skipClosedPlaces,
+        scrapePlaceDetailPage,
+        scrapeContacts,
+        reviewsSort,
+        scrapeReviewsPersonalData
+    } = input;
 
-  const scraper = new GoogleMapsScraper();
+    console.log('Scraping gestartet mit folgenden Parametern:');
+    console.log({ searchStringsArray, latitude, longitude, radiusKm, maxCrawledPlaces });
 
-  await scraper.initialize();
+    // Hier kannst du z. B. deinen Scraper mit diesen Parametern aufrufen
+    // Beispiel nur als Platzhalter:
+    for (const query of searchStringsArray) {
+        console.log(`→ Suche nach: "${query}" bei ${latitude}, ${longitude}`);
+        // Hier folgt später echte Scraping-Logik (z. B. Puppeteer, API etc.)
+    }
 
-  const results = await scraper.run({
-    searchStringsArray,
-    lat,
-    lng,
-    radiusKm,
-    maxCrawledPlaces,
-    language,
-    searchMatching,
-    website,
-    skipClosedPlaces,
-    scrapePlaceDetailPage,
-    scrapeContacts,
-    reviewsSort,
-    scrapeReviewsPersonalData,
-  });
-
-  for (const result of results) {
-    await Actor.pushData(result);
-  }
-
-  console.log("✅ Scraping complete!");
+    // Beispiel-Ausgabe
+    await Apify.setValue('OUTPUT', {
+        message: 'Scraping erfolgreich ausgeführt.',
+        totalQueries: searchStringsArray.length,
+        exampleQuery: searchStringsArray[0],
+        maxCrawledPlaces
+    });
 });
