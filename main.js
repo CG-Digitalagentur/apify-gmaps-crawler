@@ -1,13 +1,36 @@
-const Apify = require('apify');
+const { Actor } = require("apify");
+const { GoogleMapsScraper } = require("google-maps-scraper");
 
-Apify.main(async () => {
-    const input = await Apify.getInput();
+Actor.main(async () => {
+    const input = await Actor.getInput();
 
     const {
         searchStringsArray,
+        locationQuery,
         latitude,
         longitude,
-        radiusKm,
+        radius,
+        maxCrawledPlaces,
+        language = "en",
+        searchMatching = "all",
+        website = "allPlaces",
+        skipClosedPlaces = true,
+        scrapePlaceDetailPage = true,
+        scrapeContacts = true,
+        reviewsSort = "newest",
+        scrapeReviewsPersonalData = true
+    } = input;
+
+    const scraper = new GoogleMapsScraper();
+
+    await scraper.initialize();
+
+    const results = await scraper.run({
+        searchStringsArray,
+        locationQuery: locationQuery || null,
+        lat: latitude || null,
+        lng: longitude || null,
+        radiusKm: radius,
         maxCrawledPlaces,
         language,
         searchMatching,
@@ -17,23 +40,11 @@ Apify.main(async () => {
         scrapeContacts,
         reviewsSort,
         scrapeReviewsPersonalData
-    } = input;
+    });
 
-    console.log('Scraping gestartet mit folgenden Parametern:');
-    console.log({ searchStringsArray, latitude, longitude, radiusKm, maxCrawledPlaces });
-
-    // Hier kannst du z. B. deinen Scraper mit diesen Parametern aufrufen
-    // Beispiel nur als Platzhalter:
-    for (const query of searchStringsArray) {
-        console.log(`→ Suche nach: "${query}" bei ${latitude}, ${longitude}`);
-        // Hier folgt später echte Scraping-Logik (z. B. Puppeteer, API etc.)
+    for (const result of results) {
+        await Actor.pushData(result);
     }
 
-    // Beispiel-Ausgabe
-    await Apify.setValue('OUTPUT', {
-        message: 'Scraping erfolgreich ausgeführt.',
-        totalQueries: searchStringsArray.length,
-        exampleQuery: searchStringsArray[0],
-        maxCrawledPlaces
-    });
+    console.log("✅ Scraping complete!");
 });
