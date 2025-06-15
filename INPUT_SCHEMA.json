@@ -11,12 +11,12 @@
     },
     "latitude": {
       "title": "Breitengrad",
-      "type": "number",
+      "type": "string",
       "description": "Startpunkt für die geografische Suche (z. B. 48.308727)."
     },
     "longitude": {
       "title": "Längengrad",
-      "type": "number",
+      "type": "string",
       "description": "Startpunkt für die geografische Suche (z. B. 9.903306)."
     },
     "radius": {
