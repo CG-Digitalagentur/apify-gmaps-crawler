@@ -1,38 +1,37 @@
 {
-  "title": "Google Maps Scraper Input",
+  "title": "Google Maps Scraper",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
-    "searchTerm": {
-      "title": "Search term",
-      "type": "string",
-      "description": "z.B. 'fotograf', 'tätowierer', 'physiotherapeut'",
-      "editor": "textfield"
+    "searchStringsArray": {
+      "title": "Suchbegriffe",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Begriffe, nach denen auf Google Maps gesucht werden soll.",
+      "editor": "stringList"
     },
     "latitude": {
-      "title": "Latitude",
-      "type": "string",
-      "description": "Breitengrad des Startpunkts",
-      "editor": "textfield"
+      "title": "Breitengrad",
+      "type": "number",
+      "description": "Startpunkt für die geografische Suche (z. B. 48.308727)."
     },
     "longitude": {
-      "title": "Longitude",
-      "type": "string",
-      "description": "Längengrad des Startpunkts",
-      "editor": "textfield"
+      "title": "Längengrad",
+      "type": "number",
+      "description": "Startpunkt für die geografische Suche (z. B. 9.903306)."
     },
-    "radiusKm": {
-      "title": "Radius in Kilometern",
-      "type": "integer",
-      "description": "Umkreis der Suche in km",
-      "default": 50
+    "radius": {
+      "title": "Radius (km)",
+      "type": "number",
+      "description": "Suchradius in Kilometern (z. B. 50)."
     },
-    "limit": {
-      "title": "Anzahl der Ergebnisse",
+    "maxCrawledPlaces": {
+      "title": "Maximale Anzahl Ergebnisse",
       "type": "integer",
-      "description": "Maximale Anzahl an Einträgen",
-      "default": 10
+      "description": "Begrenzt die Anzahl an Ergebnissen."
     }
   },
-  "required": ["searchTerm"]
+  "required": ["searchStringsArray", "latitude", "longitude", "radius"]
 }
