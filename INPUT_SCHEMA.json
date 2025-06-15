@@ -12,21 +12,23 @@
     "latitude": {
       "title": "Latitude",
       "type": "string",
-      "default": "48.397660"
+      "description": "Latitude coordinate of the center point"
     },
     "longitude": {
       "title": "Longitude",
       "type": "string",
-      "default": "9.993304"
+      "description": "Longitude coordinate of the center point"
     },
     "radiusKm": {
       "title": "Radius in Kilometern",
       "type": "integer",
+      "description": "Radius around the coordinates in kilometers",
       "default": 50
     },
     "limit": {
       "title": "Max. Anzahl an Ergebnissen",
       "type": "integer",
+      "description": "Maximale Anzahl von Einträgen, die extrahiert werden sollen",
       "default": 10
     }
   },
