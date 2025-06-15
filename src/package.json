@@ -1,0 +1,13 @@
+{
+  "name": "gmaps-crawler",
+  "version": "1.0.0",
+  "description": "Google Maps Scraper Actor for Apify",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "dependencies": {
+    "apify": "^3.4.2",
+    "crawlee": "^3.13.4"
+  }
+}
