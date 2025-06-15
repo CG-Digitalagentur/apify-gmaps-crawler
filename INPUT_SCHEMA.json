@@ -9,17 +9,23 @@
       "description": "Begriffe, nach denen auf Google Maps gesucht werden soll.",
       "editor": "stringList"
     },
+    "locationQuery": {
+      "title": "Ort (optional)",
+      "type": "string",
+      "editor": "textfield",
+      "description": "z. B. 'Ulm, Deutschland' – wird verwendet, wenn keine Koordinaten angegeben sind."
+    },
     "latitude": {
       "title": "Breitengrad",
       "type": "string",
       "editor": "textfield",
-      "description": "z. B. 48.308727"
+      "description": "z. B. 48.308727 – wird verwendet, wenn kein Ort angegeben ist."
     },
     "longitude": {
       "title": "Längengrad",
       "type": "string",
       "editor": "textfield",
-      "description": "z. B. 9.903306"
+      "description": "z. B. 9.903306 – wird verwendet, wenn kein Ort angegeben ist."
     },
     "radius": {
       "title": "Suchradius (in km)",
@@ -36,9 +42,15 @@
   },
   "required": [
     "searchStringsArray",
-    "latitude",
-    "longitude",
     "radius",
     "maxCrawledPlaces"
+  ],
+  "anyOf": [
+    {
+      "required": ["locationQuery"]
+    },
+    {
+      "required": ["latitude", "longitude"]
+    }
   ]
 }
