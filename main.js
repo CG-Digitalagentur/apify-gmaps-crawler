@@ -6,20 +6,17 @@ Actor.main(async () => {
 
     const {
         searchStringsArray,
-        locationQuery,
         latitude,
         longitude,
         radius,
         maxCrawledPlaces,
     } = input;
 
-    // Validierung
-    if (!locationQuery && (!latitude || !longitude)) {
-        throw new Error('Entweder locationQuery ODER latitude UND longitude müssen gesetzt sein.');
+    if (!searchStringsArray || searchStringsArray.length === 0) {
+        throw new Error('Suchbegriff(e) fehlen.');
     }
 
     const scraper = new GoogleMapsScraper();
-
     await scraper.initialize();
 
     const scrapeParams = {
@@ -36,9 +33,8 @@ Actor.main(async () => {
         scrapeReviewsPersonalData: true,
     };
 
-    if (locationQuery) {
-        scrapeParams.locationQuery = locationQuery;
-    } else {
+    // Füge Koordinaten hinzu, wenn vorhanden
+    if (latitude && longitude) {
         scrapeParams.lat = parseFloat(latitude);
         scrapeParams.lng = parseFloat(longitude);
     }
