@@ -1,5 +1,5 @@
-const { Actor } = require("apify");
-const { GoogleMapsScraper } = require("google-maps-scraper");
+const { Actor } = require('apify');
+const { GoogleMapsScraper } = require('google-maps-scraper');
 
 Actor.main(async () => {
     const input = await Actor.getInput();
@@ -11,40 +11,44 @@ Actor.main(async () => {
         longitude,
         radius,
         maxCrawledPlaces,
-        language = "en",
-        searchMatching = "all",
-        website = "allPlaces",
-        skipClosedPlaces = true,
-        scrapePlaceDetailPage = true,
-        scrapeContacts = true,
-        reviewsSort = "newest",
-        scrapeReviewsPersonalData = true
     } = input;
+
+    // Validierung
+    if (!locationQuery && (!latitude || !longitude)) {
+        throw new Error('Entweder locationQuery ODER latitude UND longitude müssen gesetzt sein.');
+    }
 
     const scraper = new GoogleMapsScraper();
 
     await scraper.initialize();
 
-    const results = await scraper.run({
+    const scrapeParams = {
         searchStringsArray,
-        locationQuery: locationQuery || null,
-        lat: latitude || null,
-        lng: longitude || null,
         radiusKm: radius,
         maxCrawledPlaces,
-        language,
-        searchMatching,
-        website,
-        skipClosedPlaces,
-        scrapePlaceDetailPage,
-        scrapeContacts,
-        reviewsSort,
-        scrapeReviewsPersonalData
-    });
+        language: 'en',
+        searchMatching: 'all',
+        website: 'allPlaces',
+        skipClosedPlaces: true,
+        scrapePlaceDetailPage: true,
+        scrapeContacts: true,
+        reviewsSort: 'newest',
+        scrapeReviewsPersonalData: true,
+    };
+
+    // Standort setzen
+    if (locationQuery) {
+        scrapeParams.locationQuery = locationQuery;
+    } else {
+        scrapeParams.lat = parseFloat(latitude);
+        scrapeParams.lng = parseFloat(longitude);
+    }
+
+    const results = await scraper.run(scrapeParams);
 
     for (const result of results) {
         await Actor.pushData(result);
     }
 
-    console.log("✅ Scraping complete!");
+    console.log('✅ Scraping abgeschlossen!');
 });
