@@ -36,7 +36,6 @@ Actor.main(async () => {
         scrapeReviewsPersonalData: true,
     };
 
-    // Standort setzen
     if (locationQuery) {
         scrapeParams.locationQuery = locationQuery;
     } else {
