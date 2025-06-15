@@ -11,27 +11,23 @@
     },
     "latitude": {
       "title": "Latitude",
-      "type": "number",
-      "editor": "number",
-      "default": 48.397660
+      "type": "string",
+      "default": "48.397660"
     },
     "longitude": {
       "title": "Longitude",
-      "type": "number",
-      "editor": "number",
-      "default": 9.993304
+      "type": "string",
+      "default": "9.993304"
     },
     "radiusKm": {
       "title": "Radius in Kilometern",
-      "type": "number",
-      "default": 50,
-      "editor": "number"
+      "type": "integer",
+      "default": 50
     },
     "limit": {
       "title": "Max. Anzahl an Ergebnissen",
       "type": "integer",
-      "default": 10,
-      "editor": "number"
+      "default": 10
     }
   },
   "required": ["searchTerm"]
