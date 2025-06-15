@@ -12,23 +12,33 @@
     "latitude": {
       "title": "Breitengrad",
       "type": "string",
-      "description": "Startpunkt für die geografische Suche (z. B. 48.308727)."
+      "editor": "textfield",
+      "description": "z. B. 48.308727"
     },
     "longitude": {
       "title": "Längengrad",
       "type": "string",
-      "description": "Startpunkt für die geografische Suche (z. B. 9.903306)."
+      "editor": "textfield",
+      "description": "z. B. 9.903306"
     },
     "radius": {
-      "title": "Radius (km)",
+      "title": "Suchradius (in km)",
       "type": "integer",
-      "description": "Suchradius in Kilometern (z. B. 50)."
+      "editor": "number",
+      "description": "z. B. 50"
     },
     "maxCrawledPlaces": {
       "title": "Maximale Anzahl Ergebnisse",
       "type": "integer",
-      "description": "Begrenzt die Anzahl an Ergebnissen (z. B. 10)."
+      "editor": "number",
+      "description": "z. B. 10"
     }
   },
-  "required": ["searchStringsArray", "latitude", "longitude", "radius"]
+  "required": [
+    "searchStringsArray",
+    "latitude",
+    "longitude",
+    "radius",
+    "maxCrawledPlaces"
+  ]
 }
