@@ -6,9 +6,6 @@
     "searchStringsArray": {
       "title": "Suchbegriffe",
       "type": "array",
-      "items": {
-        "type": "string"
-      },
       "description": "Begriffe, nach denen auf Google Maps gesucht werden soll.",
       "editor": "stringList"
     },
@@ -24,13 +21,13 @@
     },
     "radius": {
       "title": "Radius (km)",
-      "type": "number",
+      "type": "integer",
       "description": "Suchradius in Kilometern (z. B. 50)."
     },
     "maxCrawledPlaces": {
       "title": "Maximale Anzahl Ergebnisse",
       "type": "integer",
-      "description": "Begrenzt die Anzahl an Ergebnissen."
+      "description": "Begrenzt die Anzahl an Ergebnissen (z. B. 10)."
     }
   },
   "required": ["searchStringsArray", "latitude", "longitude", "radius"]
